@@ -1,0 +1,29 @@
+.notes-row {
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: nowrap; */
+}
+
+.input-title{
+    border: none;
+    margin: 10px;
+    padding: 5px;
+    display: block;
+    width: 100%;
+}
+
+.notes {
+    width: 100%;
+}
+
+.input-content {
+    width: 100%;
+    border: none;
+    margin: 10px;
+    padding: 5px;
+    height: 5rem;
+}
+
+.btn {
+    margin: 2px;
+}

@@ -1,5 +1,12 @@
 
+.navbar {
+    padding: 1rem !important;
+    background-color: #e3f2fd
+}
 
+.container {
+    margin: 2rem;
+}
 
 .notes-row {
     display: flex;
@@ -14,7 +21,7 @@
 }
 
 .input-list {
-    display: inline;
+    
     border: none;
     outline: none;
 }
@@ -47,7 +54,12 @@
     margin: 2px;
 }
 
-.input-group2{
-    position: relative;
-    display: block;
+
+.outline {
+    outline: none;
+}
+
+.footer {
+    
+
 }

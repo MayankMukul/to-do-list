@@ -20,6 +20,11 @@
     /* flex-wrap: nowrap; */
 }
 
+.input-list-title {
+    font-size: medium;
+    font-weight: bold;
+}
+
 .input-list {
     
     border: none;
@@ -32,6 +37,12 @@
     padding: 5px;
     display: block;
     width: 100%;
+}
+
+.checkbox{
+    
+    border-radius: .2em !important;
+    
 }
 
 .list {
@@ -59,6 +70,10 @@
     outline: none;
 }
 
+#add-more{
+    text-align: right;
+    
+}
 .footer {
     
 

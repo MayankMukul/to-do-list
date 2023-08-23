@@ -3,35 +3,43 @@ let listItem = document.querySelectorAll(".list-item");
 let btnSaveList = document.querySelector(".savelist");
 let btnClearList = document.querySelector(".clearlist");
 
+
 function loadlist() {
     
-    if (localStorage !== null){
+    
         if (localStorage.getItem("title")!==null && localStorage.getItem("items")!==null){
-            let data = localStorage.getItem("title");
-            console.log(data);
-            inputListTitle.value = data;
-            let str = localStorage.getItem("items");
-            let dataitems = str.split(" ");
-            listItem[0].value = dataitems[0];
-            listItem[1].value = dataitems[1];
-            listItem[2].value = dataitems[2];
-            listItem[3].value = dataitems[3];
-            console.log(dataitems);
+            let titledata = localStorage.getItem("title");
+            console.log(titledata);
+            inputListTitle.value = titledata;
+            
+            let listData = localStorage.getItem("items");
+            let data = listData.split(',');
+            for (let i in data){
+                listItem[i].value = data[i];
+            }
+            
 
-        }
+        
     }else {
         inputListTitle.value = "";
-        //listItem.value = "";
-
+        listItem[0].value = "";
+        listItem[1].value = "";
+        listItem[2].value = "";
+        listItem[3].value = "";
+        console.log("hello there ");
     }
 }
 
 function saveList(){
     console.log("title : "+inputListTitle.value);
-    console.log("items : "+listItem[0].value,listItem[1].value,listItem[2].value,listItem[3].value);
+    let dataArray = []
+    for(let i of listItem){
+        dataArray.push(i.value);
+    }
+    console.log(dataArray);
 
     localStorage.setItem("title",inputListTitle.value);
-    localStorage.setItem("items",listItem[0].value+" "+listItem[1].value+" "+listItem[2].value+" "+listItem[3].value);
+    localStorage.setItem("items",dataArray);
 
     console.log("local storage set");
 }

@@ -39,6 +39,16 @@
     width: 100%;
 }
 
+.msg-box {
+    color: green;
+    display: inline;
+    font-style: italic;
+    text-align: left;
+    /* margin-left: 6rem; */
+}
+h5{
+    display: inline;
+}
 .checkbox{
     
     border-radius: .2em !important;

@@ -39,16 +39,29 @@
     width: 100%;
 }
 
-.msg-box {
+.msg-box-green {
     color: green;
+    /* display: none; */
     display: inline;
     font-style: italic;
     text-align: left;
-    /* margin-left: 6rem; */
+    margin-left: 5rem;
 }
+
+.msg-box-red {
+    color: red;
+    display: inline;
+    /* display: none; */
+    font-style: italic;
+    text-align: left;
+    margin-left: 5rem;
+}
+
 h5{
+    
     display: inline;
 }
+
 .checkbox{
     
     border-radius: .2em !important;

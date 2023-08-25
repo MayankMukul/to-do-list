@@ -17,6 +17,47 @@ let btnClearList4 = document.querySelector(".clearlist4");
 let msgboxgreen = document.querySelectorAll(".msg-box-green");
 let msgboxred = document.querySelectorAll(".msg-box-red");
 
+// let notedate = document.querySelector(".note-date");
+let notesave = document.querySelector(".note-save");
+let notedelete = document.querySelector(".note-delete")
+let notetitle = document.querySelector(".note-title");
+let notebody = document.querySelector(".note-body")
+
+
+
+
+// function fnnotedate(){
+//     notedate.innerHTML=new Date().toLocaleDateString();
+//     console.log("running date");
+// }
+//fnnotedate();
+
+function saveNote(){   
+    localStorage.setItem("ntitle",notetitle.value);
+    localStorage.setItem("nbody", notebody.value);
+    console.log("NOTE SAVED")
+}
+
+function deletenote(){
+    if(localStorage.getItem('ntitle') && localStorage.getItem('nbody')){
+        localStorage.removeItem('ntitle');  //remove the key/value pair from storage by its name, in this case "name"
+        localStorage.removeItem('nbody');  //remove item from local storage by key name
+        console.log("note deleted");
+        clearnote();
+    } else {
+        console.log("nothing to delete");
+    }
+}
+
+function clearnote(){
+    notetitle.value = ``;
+    notebody.value=``;
+    console.log("cleared");
+}
+
+
+notesave.addEventListener("click",saveNote);
+notedelete.addEventListener("click",deletenote);
 
 function loadlist(title,items,listItem,inputListTitle,n) {
         if (localStorage.getItem(title)!==null && localStorage.getItem(items)!==null){
@@ -118,7 +159,6 @@ function loadthird(){
     let items3 = "item3";
     loadlist(title3,items3,listItem3,inputListTitle3,2);
 }
-
 
 function fourthlistSave() {
     let title4 = "title4";

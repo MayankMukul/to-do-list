@@ -33,9 +33,14 @@ let notebody = document.querySelector(".note-body")
 //fnnotedate();
 
 function saveNote(){   
-    localStorage.setItem("ntitle",notetitle.value);
-    localStorage.setItem("nbody", notebody.value);
-    console.log("NOTE SAVED")
+    if (notetitle.value != "" && notebody.value!=""){
+        localStorage.setItem("ntitle",notetitle.value);
+        localStorage.setItem("nbody", notebody.value);
+        console.log("NOTE SAVED");
+
+    } else {
+        console.log('nothing to save');
+    }
 }
 
 function deletenote(){
@@ -55,7 +60,15 @@ function clearnote(){
     console.log("cleared");
 }
 
+function loadnote(){
+    if(localStorage.getItem('ntitle') && localStorage.getItem('nbody')){
+        console.log("loading note");
+        notetitle.value = localStorage.getItem('ntitle');
+        notebody.value = localStorage.getItem('nbody');
+    } 
+}
 
+loadnote();
 notesave.addEventListener("click",saveNote);
 notedelete.addEventListener("click",deletenote);
 
@@ -78,7 +91,7 @@ function loadlist(title,items,listItem,inputListTitle,n) {
         }
         console.log("else")
     }
-    console.log("loading")
+    console.log("loading list")
 }
 
 function saveList(title,items,listItem,inputListTitle,n){

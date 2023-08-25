@@ -57,8 +57,7 @@
     margin-left: 5rem;
 }
 
-h5{
-    
+h5{ 
     display: inline;
 }
 
@@ -75,7 +74,12 @@ h5{
 .notes {
     width: 100%;
 }
-
+.note-msg-box{
+    display: inline;
+    font-style: italic;
+    text-align: right;
+    margin-left: 7rem;
+}
 .input-content {
     width: 100%;
     border: none;

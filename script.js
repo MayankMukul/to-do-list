@@ -21,7 +21,9 @@ let msgboxred = document.querySelectorAll(".msg-box-red");
 let notesave = document.querySelector(".note-save");
 let notedelete = document.querySelector(".note-delete")
 let notetitle = document.querySelector(".note-title");
-let notebody = document.querySelector(".note-body")
+let notebody = document.querySelector(".note-body");
+let noteMsgBox = document.querySelector(".note-msg-box");
+
 
 
 
@@ -37,9 +39,11 @@ function saveNote(){
         localStorage.setItem("ntitle",notetitle.value);
         localStorage.setItem("nbody", notebody.value);
         console.log("NOTE SAVED");
+        noteMsgBox.innerHTML = `<span style="color:green">Saved</span>`;
 
     } else {
-        console.log('nothing to save');
+        console.log('Nothing to save');
+        noteMsgBox.innerHTML = `<span style="color:red">Nothing to save</span>`;
     }
 }
 
@@ -49,8 +53,10 @@ function deletenote(){
         localStorage.removeItem('nbody');  //remove item from local storage by key name
         console.log("note deleted");
         clearnote();
+        noteMsgBox.innerHTML = `<span style="color:red">Deleted</span>`;
     } else {
         console.log("nothing to delete");
+        noteMsgBox.innerHTML = `<span style="color:red">Nothing to dalete</span>`;
     }
 }
 
@@ -58,6 +64,7 @@ function clearnote(){
     notetitle.value = ``;
     notebody.value=``;
     console.log("cleared");
+    noteMsgBox.innerHTML = `<span style="color:green">Cleared</span>`;
 }
 
 function loadnote(){
@@ -65,6 +72,7 @@ function loadnote(){
         console.log("loading note");
         notetitle.value = localStorage.getItem('ntitle');
         notebody.value = localStorage.getItem('nbody');
+        noteMsgBox.innerHTML = `<span style="color:green">Loaded</span>`;
     } 
 }
 

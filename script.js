@@ -1,4 +1,4 @@
-let inputListTitle1 = document.querySelector(".input-list-title-1");
+let inputListTitle = document.querySelectorAll(".input-list-title");
 let inputListTitle2 = document.querySelector(".input-list-title-2");
 let inputListTitle3 = document.querySelector(".input-list-title-3");
 let inputListTitle4 = document.querySelector(".input-list-title-4");
@@ -93,6 +93,7 @@ notedelete2.addEventListener("click",function (){
     deletenote(1);
 });
 
+
 function loadlist(title,items,listItem,inputListTitle,n) {
         if (localStorage.getItem(title)!==null && localStorage.getItem(items)!==null){
             let titledata = localStorage.getItem(title);
@@ -115,27 +116,26 @@ function loadlist(title,items,listItem,inputListTitle,n) {
     console.log("loading list")
 }
 
-function saveList(title,items,listItem,inputListTitle,n){
-    console.log(listItem,inputListTitle,n);
+function saveList(listItem,n){
     let dataArray = []
+    console.log(listItem)
     for(let i of listItem){
         dataArray.push(i.value);
-        console.log('array',dataArray,'i',i);
     }
-       console.log("saveList to local storage")
-
-    localStorage.setItem(title,inputListTitle.value);
-    localStorage.setItem(items,dataArray);
+    console.log(n);
+    localStorage.setItem(`title${n}`,inputListTitle[n].value);
+    localStorage.setItem(`items${n}`,dataArray);
     msgboxred[n].style.display="none";
     msgboxgreen[n].style.display="inline";
     msgboxgreen[n].innerText = `Saved`;
+    
 
 }
 
-function clearList(title,items,listItem,inputListTitle,n){
-    localStorage.removeItem(title);
-    localStorage.removeItem(items);
-    inputListTitle.value = "";
+function clearList(listItem,n){
+    localStorage.removeItem(`title${n}`);
+    localStorage.removeItem(`items${n}`);
+    inputListTitle[n].value = "";
     for (let i of listItem){
              i.value = "";
          }
@@ -146,64 +146,30 @@ function clearList(title,items,listItem,inputListTitle,n){
 }
 
 
-function firstlistSave() {
-    let title1 = "title1";
-    let items1 = "item1";
-    saveList(title1,items1,listItem1,inputListTitle1,0);
-}
-function firstlistClear(){
-    let title1 = "title1";
-    let items1 = "item1";
-    clearList(title1,items1,listItem1,inputListTitle1,0);
-}
+
 function loadfirst(){
     let title1 = "title1";
     let items1 = "item1";
     loadlist(title1,items1,listItem1,inputListTitle1,0);
 }
 
-function secondlistSave() {
-    let title2 = "title2";
-    let items2 = "item2";
-    saveList(title2,items2,listItem2,inputListTitle2,1);
-}
-function secondlistClear(){
-    let title2 = "title2";
-    let items2 = "item2";
-    clearList(title2,items2,listItem2,inputListTitle2,1);
-}
+
+
 function loadsecond(){
     let title2 = "title2";
     let items2 = "item2";
     loadlist(title2,items2,listItem2,inputListTitle2,1);
 }
 
-function thirdlistSave() {
-    let title3 = "title3";
-    let items3 = "item3";
-    saveList(title3,items3,listItem3,inputListTitle3,2);
-}
-function thirdlistClear(){
-    let title3 = "title3";
-    let items3 = "item3";
-    clearList(title3,items3,listItem3,inputListTitle3,2);
-}
+
 function loadthird(){
     let title3 = "title3";
     let items3 = "item3";
     loadlist(title3,items3,listItem3,inputListTitle3,2);
 }
 
-function fourthlistSave() {
-    let title4 = "title4";
-    let items4 = "item4";
-    saveList(title4,items4,listItem4,inputListTitle4,3);
-}
-function fourthlistClear(){
-    let title4 = "title4";
-    let items4 = "item4";
-    clearList(title4,items4,listItem4,inputListTitle4,3);
-}
+
+
 function loadfourth(){
     let title4 = "title4";
     let items4 = "item4";
@@ -211,16 +177,32 @@ function loadfourth(){
 }
 
     
-loadfirst();
-loadsecond();
-loadthird();
-loadfourth();
+//loadfirst();
+//loadsecond();
+//loadthird();
+//loadfourth();
 
-btnSaveList1.addEventListener("click",firstlistSave);
-btnClearList1.addEventListener("click",firstlistClear);
-btnSaveList2.addEventListener("click",secondlistSave);
-btnClearList2.addEventListener("click",secondlistClear);
-btnSaveList3.addEventListener("click",thirdlistSave);
-btnClearList3.addEventListener("click",thirdlistClear);
-btnSaveList4.addEventListener("click",fourthlistSave);
-btnClearList4.addEventListener("click",fourthlistClear);
+btnSaveList1.addEventListener("click",function () {
+    saveList(listItem1,0);  
+});
+btnSaveList2.addEventListener("click",function(){
+    saveList(listItem2,1);
+});
+btnSaveList3.addEventListener("click",function (){
+    saveList(listItem3,2);
+});
+btnSaveList4.addEventListener("click",function(){
+    saveList(listItem4,3);
+});
+btnClearList1.addEventListener("click",function (){
+    clearList(listItem1,0);
+});
+btnClearList2.addEventListener("click",function (){
+    clearList(listItem2,1);
+});
+btnClearList3.addEventListener("click",function (){
+    clearList(listItem3,2);
+});
+btnClearList4.addEventListener("click",function (){
+    clearList(listItem4,3);
+});

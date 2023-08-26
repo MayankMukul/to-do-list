@@ -18,11 +18,13 @@ let msgboxgreen = document.querySelectorAll(".msg-box-green");
 let msgboxred = document.querySelectorAll(".msg-box-red");
 
 // let notedate = document.querySelector(".note-date");
-let notesave = document.querySelector(".note-save");
-let notedelete = document.querySelector(".note-delete")
-let notetitle = document.querySelector(".note-title");
-let notebody = document.querySelector(".note-body");
-let noteMsgBox = document.querySelector(".note-msg-box");
+let notesave1 = document.querySelector(".note-save1");
+let notesave2 = document.querySelector(".note-save2");
+let notedelete1 = document.querySelector(".note-delete1")
+let notedelete2 = document.querySelector(".note-delete2")
+let notetitle = document.querySelectorAll(".note-title");
+let notebody = document.querySelectorAll(".note-body");
+let noteMsgBox = document.querySelectorAll(".note-msg-box");
 
 
 
@@ -34,51 +36,62 @@ let noteMsgBox = document.querySelector(".note-msg-box");
 // }
 //fnnotedate();
 
-function saveNote(){   
-    if (notetitle.value != "" && notebody.value!=""){
-        localStorage.setItem("ntitle",notetitle.value);
-        localStorage.setItem("nbody", notebody.value);
+function saveNote(n){   
+    if (notetitle[n].value != "" && notebody[n].value!=""){
+        localStorage.setItem(`ntitle${n}`,notetitle[n].value);
+        localStorage.setItem(`nbody${n}`, notebody[n].value);
         console.log("NOTE SAVED");
-        noteMsgBox.innerHTML = `<span style="color:green">Saved</span>`;
+        noteMsgBox[n].innerHTML = `<span style="color:green">Saved</span>`;
 
     } else {
         console.log('Nothing to save');
-        noteMsgBox.innerHTML = `<span style="color:red">Nothing to save</span>`;
+        noteMsgBox[n].innerHTML = `<span style="color:red">Nothing to save</span>`;
     }
 }
 
-function deletenote(){
-    if(localStorage.getItem('ntitle') && localStorage.getItem('nbody')){
-        localStorage.removeItem('ntitle');  //remove the key/value pair from storage by its name, in this case "name"
-        localStorage.removeItem('nbody');  //remove item from local storage by key name
+function deletenote(n){
+    if(localStorage.getItem(`ntitle${n}`) && localStorage.getItem(`nbody${n}`)){
+        localStorage.removeItem(`ntitle${n}`);  //remove the key/value pair from storage by its name, in this case "name"
+        localStorage.removeItem(`nbody${n}`);  //remove item from local storage by key name
         console.log("note deleted");
-        clearnote();
-        noteMsgBox.innerHTML = `<span style="color:red">Deleted</span>`;
+        clearnote(n);
+        noteMsgBox[n].innerHTML = `<span style="color:red">Deleted</span>`;
     } else {
         console.log("nothing to delete");
-        noteMsgBox.innerHTML = `<span style="color:red">Nothing to dalete</span>`;
+        noteMsgBox[n].innerHTML = `<span style="color:red">Nothing to dalete</span>`;
     }
 }
 
-function clearnote(){
-    notetitle.value = ``;
-    notebody.value=``;
+function clearnote(n){
+    notetitle[n].value = ``;
+    notebody[n].value=``;
     console.log("cleared");
-    noteMsgBox.innerHTML = `<span style="color:green">Cleared</span>`;
+    noteMsgBox[n].innerHTML = `<span style="color:green">Cleared</span>`;
 }
 
-function loadnote(){
-    if(localStorage.getItem('ntitle') && localStorage.getItem('nbody')){
+function loadnote(n){
+    if(localStorage.getItem(`ntitle${n}`) && localStorage.getItem(`nbody${n}`)){
         console.log("loading note");
-        notetitle.value = localStorage.getItem('ntitle');
-        notebody.value = localStorage.getItem('nbody');
-        noteMsgBox.innerHTML = `<span style="color:green">Loaded</span>`;
+        notetitle[n].value = localStorage.getItem(`ntitle${n}`);
+        notebody[n].value = localStorage.getItem(`nbody${n}`);
+        noteMsgBox[n].innerHTML = `<span style="color:green">Loaded</span>`;
     } 
 }
 
-loadnote();
-notesave.addEventListener("click",saveNote);
-notedelete.addEventListener("click",deletenote);
+loadnote(0);
+loadnote(1);
+notesave1.addEventListener("click",function(){
+    saveNote(0);
+});
+notesave2.addEventListener("click",function (){
+    saveNote(1);
+});
+notedelete1.addEventListener("click",function (){
+    deletenote(0);
+});
+notedelete2.addEventListener("click",function (){
+    deletenote(1);
+});
 
 function loadlist(title,items,listItem,inputListTitle,n) {
         if (localStorage.getItem(title)!==null && localStorage.getItem(items)!==null){

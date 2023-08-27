@@ -15,23 +15,16 @@ let listMsgBox = document.querySelectorAll(".list-msg-box");
 
 //checkbox
 let cb = document.querySelectorAll('.checkbox');
-for (let i in cb){
-    // console.log(i); 
-    cb[i].addEventListener('change',function(){
-        console.log(this);
-        if(this.checked && cb[i].value !== ""){
-        console.log(cb[i].value);
-        console.log("clicked");
-        // a=i.value;
-        cb[i].setAttribute('style',"text-decoration:line-through");
-        }else{
-            console.log(cb[i]);
-            cb[i].removeAttribute('style',"text-decoration:line-through");
+
+for(a of cb){
+    a.addEventListener('change',function(){
+        if(this.checked && this.nextElementSibling.value!= "" ){
+            this.nextElementSibling.classList.add("strike");
+        }else {
+            this.nextElementSibling.classList.remove("strike");
         }
     })
-
 }
-
 
 
 // let notedate = document.querySelector(".note-date");

@@ -13,6 +13,27 @@ let btnClearList3 = document.querySelector(".clearlist3");
 let btnClearList4 = document.querySelector(".clearlist4");
 let listMsgBox = document.querySelectorAll(".list-msg-box");
 
+//checkbox
+let cb = document.querySelectorAll('.checkbox');
+for (let i in cb){
+    // console.log(i); 
+    cb[i].addEventListener('change',function(){
+        console.log(this);
+        if(this.checked && cb[i].value !== ""){
+        console.log(cb[i].value);
+        console.log("clicked");
+        // a=i.value;
+        cb[i].setAttribute('style',"text-decoration:line-through");
+        }else{
+            console.log(cb[i]);
+            cb[i].removeAttribute('style',"text-decoration:line-through");
+        }
+    })
+
+}
+
+
+
 // let notedate = document.querySelector(".note-date");
 let notesave1 = document.querySelector(".note-save1");
 let notesave2 = document.querySelector(".note-save2");
@@ -108,7 +129,7 @@ function loadlist(listItem,n) {
 }
 
 function saveList(listItem,n){
-    
+    console.log(listItem);
     let dataArray = [];
     for(let i of listItem){
         dataArray.push(i.value);

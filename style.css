@@ -54,6 +54,10 @@ h5{
     border-radius: .2em !important;
 }
 
+.strike{
+    text-decoration: line-through;
+}
+
 .list {
     width: 40%;
 }

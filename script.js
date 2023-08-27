@@ -1,7 +1,4 @@
 let inputListTitle = document.querySelectorAll(".input-list-title");
-let inputListTitle2 = document.querySelector(".input-list-title-2");
-let inputListTitle3 = document.querySelector(".input-list-title-3");
-let inputListTitle4 = document.querySelector(".input-list-title-4");
 let listItem1 = document.querySelectorAll(".list-item-1");
 let listItem2 = document.querySelectorAll(".list-item-2");
 let listItem3 = document.querySelectorAll(".list-item-3");
@@ -14,8 +11,7 @@ let btnClearList1 = document.querySelector(".clearlist1");
 let btnClearList2 = document.querySelector(".clearlist2");
 let btnClearList3 = document.querySelector(".clearlist3");
 let btnClearList4 = document.querySelector(".clearlist4");
-let msgboxgreen = document.querySelectorAll(".msg-box-green");
-let msgboxred = document.querySelectorAll(".msg-box-red");
+let listMsgBox = document.querySelectorAll(".list-msg-box");
 
 // let notedate = document.querySelector(".note-date");
 let notesave1 = document.querySelector(".note-save1");
@@ -44,7 +40,6 @@ function saveNote(n){
         noteMsgBox[n].innerHTML = `<span style="color:green">Saved</span>`;
 
     } else {
-        console.log('Nothing to save');
         noteMsgBox[n].innerHTML = `<span style="color:red">Nothing to save</span>`;
     }
 }
@@ -94,93 +89,62 @@ notedelete2.addEventListener("click",function (){
 });
 
 
-function loadlist(title,items,listItem,inputListTitle,n) {
-        if (localStorage.getItem(title)!==null && localStorage.getItem(items)!==null){
-            let titledata = localStorage.getItem(title);
-            inputListTitle.value = titledata;
-            
-            let listData = localStorage.getItem(items);
+function loadlist(listItem,n) {
+        if (localStorage.getItem(`title${n}`)!==null && localStorage.getItem(`items${n}`)!==null){
+            let titledata = localStorage.getItem(`title${n}`);
+            inputListTitle[n].value = titledata;
+            let listData = localStorage.getItem(`items${n}`);
             let data = listData.split(',');
             for (let i in data){
                 listItem[i].value = data[i];
             }   
-            msgboxgreen[n].innerText = "Loaded"   
-            console.log("if") 
+            listMsgBox[n].innerHTML = `<span style="color:green">Loaded</span>`;
     }else {
-        inputListTitle.value = "";
+        inputListTitle[n].value = "";
         for (let i of listItem){
             i.value = "";
         }
-        console.log("else")
     }
-    console.log("loading list")
 }
 
 function saveList(listItem,n){
-    let dataArray = []
-    console.log(listItem)
+    
+    let dataArray = [];
     for(let i of listItem){
         dataArray.push(i.value);
     }
-    console.log(n);
-    localStorage.setItem(`title${n}`,inputListTitle[n].value);
-    localStorage.setItem(`items${n}`,dataArray);
-    msgboxred[n].style.display="none";
-    msgboxgreen[n].style.display="inline";
-    msgboxgreen[n].innerText = `Saved`;
+    if(inputListTitle[n].value !='' && dataArray != ''){   
+        localStorage.setItem(`title${n}`,inputListTitle[n].value);
+        localStorage.setItem(`items${n}`,dataArray);
+        listMsgBox[n].innerHTML = `<span style="color:green">Saved</span>`;
+
+    } else {
+        listMsgBox[n].innerHTML = `<span style="color:red">Nothing to Save</span>`
+    }
     
 
 }
 
 function clearList(listItem,n){
-    localStorage.removeItem(`title${n}`);
-    localStorage.removeItem(`items${n}`);
-    inputListTitle[n].value = "";
-    for (let i of listItem){
-             i.value = "";
-         }
-    msgboxgreen[n].style.display="none";
-    msgboxred[n].style.display="inline";
-    msgboxred[n].innerText = `Cleared`;
+    if(inputListTitle[n].value != '' && listItem.value != ''){
 
+        localStorage.removeItem(`title${n}`);
+        localStorage.removeItem(`items${n}`);
+        inputListTitle[n].value = "";
+        for (let i of listItem){
+                 i.value = "";
+             }
+       listMsgBox[n].innerHTML = `<span style="color:red">Cleared</span>`;
+
+    } else {
+        listMsgBox[n].innerHTML = `<span style="color:red">Nothing to Clear</span>`
+    }
 }
 
-
-
-function loadfirst(){
-    let title1 = "title1";
-    let items1 = "item1";
-    loadlist(title1,items1,listItem1,inputListTitle1,0);
-}
-
-
-
-function loadsecond(){
-    let title2 = "title2";
-    let items2 = "item2";
-    loadlist(title2,items2,listItem2,inputListTitle2,1);
-}
-
-
-function loadthird(){
-    let title3 = "title3";
-    let items3 = "item3";
-    loadlist(title3,items3,listItem3,inputListTitle3,2);
-}
-
-
-
-function loadfourth(){
-    let title4 = "title4";
-    let items4 = "item4";
-    loadlist(title4,items4,listItem4,inputListTitle4,3);
-}
-
-    
-//loadfirst();
-//loadsecond();
-//loadthird();
-//loadfourth();
+loadlist(listItem1,0);
+loadlist(listItem2,1);
+loadlist(listItem3,2);
+loadlist(listItem4,3);
 
 btnSaveList1.addEventListener("click",function () {
     saveList(listItem1,0);  

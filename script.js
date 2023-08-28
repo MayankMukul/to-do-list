@@ -15,7 +15,7 @@ let listMsgBox = document.querySelectorAll(".list-msg-box");
 
 //checkbox
 let cb = document.querySelectorAll('.checkbox');
-
+let cbArray = [];
 for(a of cb){
     a.addEventListener('change',function(){
         if(this.checked && this.nextElementSibling.value!= "" ){
@@ -26,6 +26,20 @@ for(a of cb){
     })
 }
 
+function loadcb (){
+    if(localStorage.getItem(`cbarray`)!==null){
+        let loadcbdata=localStorage.getItem(`cbarray`);
+        let cbdata = loadcbdata.split(',');
+        for(let j in cbdata ){
+            if (cbdata[j]=='true'){
+                cb[j].checked=true
+            } else {
+                cb[j].checked=false;
+            }
+        }
+    }  
+}
+loadcb();
 
 // let notedate = document.querySelector(".note-date");
 let notesave1 = document.querySelector(".note-save1");
@@ -103,6 +117,8 @@ notedelete2.addEventListener("click",function (){
 });
 
 
+
+
 function loadlist(listItem,n) {
         if (localStorage.getItem(`title${n}`)!==null && localStorage.getItem(`items${n}`)!==null){
             let titledata = localStorage.getItem(`title${n}`);
@@ -119,10 +135,11 @@ function loadlist(listItem,n) {
             i.value = "";
         }
     }
+
+    
 }
 
 function saveList(listItem,n){
-    console.log(listItem);
     let dataArray = [];
     for(let i of listItem){
         dataArray.push(i.value);
@@ -131,12 +148,19 @@ function saveList(listItem,n){
         localStorage.setItem(`title${n}`,inputListTitle[n].value);
         localStorage.setItem(`items${n}`,dataArray);
         listMsgBox[n].innerHTML = `<span style="color:green">Saved</span>`;
-
-    } else {
-        listMsgBox[n].innerHTML = `<span style="color:red">Nothing to Save</span>`
-    }
+    }else {
+        listMsgBox[n].innerHTML = `<span style="color:red">Enter Title/List Element</span>`
+    } 
     
-
+    
+    for(let j of cb){
+        if (j.checked){
+            cbArray.push(true);
+        } else {
+            cbArray.push(false);
+        }
+    }
+    localStorage.setItem(`cbarray`,cbArray);
 }
 
 function clearList(listItem,n){
@@ -153,6 +177,11 @@ function clearList(listItem,n){
     } else {
         listMsgBox[n].innerHTML = `<span style="color:red">Nothing to Clear</span>`
     }
+
+    for (let a=4*n ; a<4+(4*n);a++){
+        cb[a].checked = false;
+    }
+
 }
 
 loadlist(listItem1,0);

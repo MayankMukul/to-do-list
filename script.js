@@ -13,9 +13,10 @@ let btnClearList3 = document.querySelector(".clearlist3");
 let btnClearList4 = document.querySelector(".clearlist4");
 let listMsgBox = document.querySelectorAll(".list-msg-box");
 
+
+
 //checkbox
 let cb = document.querySelectorAll('.checkbox');
-let cbArray = [];
 for(a of cb){
     a.addEventListener('change',function(){
         if(this.checked && this.nextElementSibling.value!= "" ){
@@ -26,11 +27,11 @@ for(a of cb){
     })
 }
 
+
 function loadcb (){
     if(localStorage.getItem(`cbarray`)!==null){
         let loadcbdata=localStorage.getItem(`cbarray`);
         let cbdata = loadcbdata.split(',');
-        console.log(cbdata);
         for(let j in cbdata ){
             if (cbdata[j]=='true'){
                 cb[j].checked=true;
@@ -38,9 +39,27 @@ function loadcb (){
                 cb[j].checked=false;
             }
         }
+        for (i of cb){
+            if(i.checked) {
+                i.nextElementSibling.classList.add("strike") ;
+            }
+         }  
     }  
 }
-//loadcb();
+loadcb();
+
+function updatecb(){
+    let cbArray = [];
+    for(let j of cb){
+        if (j.checked){
+            cbArray.push(true);
+        } else {
+            cbArray.push(false);
+        }
+    }
+    localStorage.setItem(`cbarray`,cbArray);
+}
+
 
 let notedate = document.querySelectorAll(".note-date");
 let notesave1 = document.querySelector(".note-save1");
@@ -55,14 +74,14 @@ let noteMsgBox = document.querySelectorAll(".note-msg-box");
 
 
 
-function fnnotedate(){
+function fnNoteDate(){
     notedate.forEach((nd)=>{
         setInterval(()=>{
             nd.innerHTML=`${new Date().toLocaleDateString()}<br> ${new Date().toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'})}`;
         }),60000;
     })
    }
-fnnotedate();
+fnNoteDate();
 
 function saveNote(n){   
     if (notetitle[n].value != "" && notebody[n].value!=""){
@@ -74,21 +93,23 @@ function saveNote(n){
         notedate[n].nextElementSibling.innerHTML=`<br>Last Updated on : ${localStorage.getItem(`ndate${n}`)}<br> ${localStorage.getItem(`ntime${n}`)} `
 
     } else {
-        noteMsgBox[n].innerHTML = `<span style="color:red">Nothing to save</span>`;
+        noteMsgBox[n].innerHTML = `<span style="color:red">*Enter Note Title/Body</span>`;
     }
 }
 
 function deletenote(n){
     if(localStorage.getItem(`ntitle${n}`) && localStorage.getItem(`nbody${n}`)){
-        localStorage.removeItem(`ntitle${n}`);  //remove the key/value pair from storage by its name, in this case "name"
-        localStorage.removeItem(`nbody${n}`);  //remove item from local storage by key name
-        localStorage.removeItem(`ndate${n}`);
-        localStorage.removeItem(`ntime${n}`);
-        clearnote(n);
-        
-        noteMsgBox[n].innerHTML = `<span style="color:red">Deleted</span>`;
+        if(confirm("Do you want to delete the note")){
+            localStorage.removeItem(`ntitle${n}`);  //remove the key/value pair from storage by its name, in this case "name"
+            localStorage.removeItem(`nbody${n}`);  //remove item from local storage by key name
+            localStorage.removeItem(`ndate${n}`);
+            localStorage.removeItem(`ntime${n}`);
+            clearnote(n);
+            
+            noteMsgBox[n].innerHTML = `<span style="color:red">Deleted</span>`;
+        }
     } else {
-        noteMsgBox[n].innerHTML = `<span style="color:red">Nothing to dalete</span>`;
+        noteMsgBox[n].innerHTML = `<span style="color:red">*Nothing to Delete</span>`;
     }
 }
 
@@ -156,30 +177,24 @@ function saveList(listItem,n){
         localStorage.setItem(`items${n}`,dataArray);
         listMsgBox[n].innerHTML = `<span style="color:green">Saved</span>`;
     }else {
-        listMsgBox[n].innerHTML = `<span style="color:red">Enter Title/List Element</span>`
+        listMsgBox[n].innerHTML = `<span style="color:red">*Enter Title/List Item</span>`
     } 
     
+    updatecb();
     
-    for(let j of cb){
-        if (j.checked){
-            cbArray.push(true);
-        } else {
-            cbArray.push(false);
-        }
-    }
-    localStorage.setItem(`cbarray`,cbArray);
 }
 
 function clearList(listItem,n){
     if(inputListTitle[n].value != '' && listItem.value != ''){
-
-        localStorage.removeItem(`title${n}`);
-        localStorage.removeItem(`items${n}`);
-        inputListTitle[n].value = "";
-        for (let i of listItem){
-                 i.value = "";
-             }
-       listMsgBox[n].innerHTML = `<span style="color:red">Cleared</span>`;
+        if(confirm("Do you want to clear the list")){
+            localStorage.removeItem(`title${n}`);
+            localStorage.removeItem(`items${n}`);
+            inputListTitle[n].value = "";
+            for (let i of listItem){
+                     i.value = "";
+                 }
+           listMsgBox[n].innerHTML = `<span style="color:red">Cleared</span>`;
+        }
 
     } else {
         listMsgBox[n].innerHTML = `<span style="color:red">Nothing to Clear</span>`
@@ -187,8 +202,9 @@ function clearList(listItem,n){
 
     for (let a=4*n ; a<4+(4*n);a++){
         cb[a].checked = false;
+        cb[a].nextElementSibling.classList.remove("strike");
     }
-
+    updatecb();
 }
 
 loadlist(listItem1,0);

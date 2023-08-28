@@ -11,24 +11,24 @@
 .notes-row {
     display: flex;
     flex-direction: row;
-    /* flex-wrap: nowrap; */
 }
 
 .list-row {
-    display: flex;
-    flex-direction: row;
-    /* flex-wrap: nowrap; */
+    /* display: flex;
+    flex-direction: row; */
+    align-items: center;
 }
 
 .input-list-title {
     font-size: medium;
     font-weight: bold;
+    width: 100%;
 }
 
 .input-list {
-    
     border: none;
     outline: none;
+    width: 80%;
 }
 
 .input-title{
@@ -36,7 +36,7 @@
     margin: 10px;
     padding: 5px;
     display: block;
-    width: 100%;
+    width: 80%;
 }
 
 .list-msg-box {
@@ -59,11 +59,11 @@ h5{
 }
 
 .list {
-    width: 40%;
+    /* width: 100%; */
 }
 
 .notes {
-    width: 100%;
+    width: 80%;
 }
 .note-msg-box{
     display: inline-block;
@@ -91,8 +91,4 @@ h5{
 #add-more{
     text-align: right;
     
-}
-.footer {
-    
-
 }

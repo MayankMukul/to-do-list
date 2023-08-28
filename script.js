@@ -30,18 +30,19 @@ function loadcb (){
     if(localStorage.getItem(`cbarray`)!==null){
         let loadcbdata=localStorage.getItem(`cbarray`);
         let cbdata = loadcbdata.split(',');
+        console.log(cbdata);
         for(let j in cbdata ){
             if (cbdata[j]=='true'){
-                cb[j].checked=true
+                cb[j].checked=true;
             } else {
                 cb[j].checked=false;
             }
         }
     }  
 }
-loadcb();
+//loadcb();
 
-// let notedate = document.querySelector(".note-date");
+let notedate = document.querySelectorAll(".note-date");
 let notesave1 = document.querySelector(".note-save1");
 let notesave2 = document.querySelector(".note-save2");
 let notedelete1 = document.querySelector(".note-delete1")
@@ -54,18 +55,23 @@ let noteMsgBox = document.querySelectorAll(".note-msg-box");
 
 
 
-// function fnnotedate(){
-//     notedate.innerHTML=new Date().toLocaleDateString();
-//     console.log("running date");
-// }
-//fnnotedate();
+function fnnotedate(){
+    notedate.forEach((nd)=>{
+        setInterval(()=>{
+            nd.innerHTML=`${new Date().toLocaleDateString()}<br> ${new Date().toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'})}`;
+        }),60000;
+    })
+   }
+fnnotedate();
 
 function saveNote(n){   
     if (notetitle[n].value != "" && notebody[n].value!=""){
         localStorage.setItem(`ntitle${n}`,notetitle[n].value);
         localStorage.setItem(`nbody${n}`, notebody[n].value);
-        console.log("NOTE SAVED");
+        localStorage.setItem(`ndate${n}`,new Date().toLocaleDateString());
+        localStorage.setItem(`ntime${n}`,new Date().toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'}));
         noteMsgBox[n].innerHTML = `<span style="color:green">Saved</span>`;
+        notedate[n].nextElementSibling.innerHTML=`<br>Last Updated on : ${localStorage.getItem(`ndate${n}`)}<br> ${localStorage.getItem(`ntime${n}`)} `
 
     } else {
         noteMsgBox[n].innerHTML = `<span style="color:red">Nothing to save</span>`;
@@ -76,11 +82,12 @@ function deletenote(n){
     if(localStorage.getItem(`ntitle${n}`) && localStorage.getItem(`nbody${n}`)){
         localStorage.removeItem(`ntitle${n}`);  //remove the key/value pair from storage by its name, in this case "name"
         localStorage.removeItem(`nbody${n}`);  //remove item from local storage by key name
-        console.log("note deleted");
+        localStorage.removeItem(`ndate${n}`);
+        localStorage.removeItem(`ntime${n}`);
         clearnote(n);
+        
         noteMsgBox[n].innerHTML = `<span style="color:red">Deleted</span>`;
     } else {
-        console.log("nothing to delete");
         noteMsgBox[n].innerHTML = `<span style="color:red">Nothing to dalete</span>`;
     }
 }
@@ -88,16 +95,16 @@ function deletenote(n){
 function clearnote(n){
     notetitle[n].value = ``;
     notebody[n].value=``;
-    console.log("cleared");
+    notedate[n].nextElementSibling.innerHTML="";
     noteMsgBox[n].innerHTML = `<span style="color:green">Cleared</span>`;
 }
 
 function loadnote(n){
-    if(localStorage.getItem(`ntitle${n}`) && localStorage.getItem(`nbody${n}`)){
-        console.log("loading note");
+    if(localStorage.getItem(`ntitle${n}`) && localStorage.getItem(`nbody${n}`) && localStorage.getItem(`ndate${n}`)){
         notetitle[n].value = localStorage.getItem(`ntitle${n}`);
         notebody[n].value = localStorage.getItem(`nbody${n}`);
         noteMsgBox[n].innerHTML = `<span style="color:green">Loaded</span>`;
+        notedate[n].nextElementSibling.innerHTML=`<br>Last Updated on : ${localStorage.getItem(`ndate${n}`)}<br> ${localStorage.getItem(`ntime${n}`)} `
     } 
 }
 

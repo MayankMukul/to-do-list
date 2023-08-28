@@ -66,10 +66,10 @@ h5{
     width: 100%;
 }
 .note-msg-box{
-    display: inline;
+    display: inline-block;
     font-style: italic;
     text-align: right;
-    margin-left: 7rem;
+    width: 80%;
 }
 .input-content {
     width: 100%;

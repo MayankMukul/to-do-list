@@ -185,7 +185,7 @@ function saveList(listItem,n){
 }
 
 function clearList(listItem,n){
-    if(inputListTitle[n].value != '' && listItem.value != ''){
+    
         if(confirm("Do you want to clear the list")){
             localStorage.removeItem(`title${n}`);
             localStorage.removeItem(`items${n}`);
@@ -195,10 +195,6 @@ function clearList(listItem,n){
                  }
            listMsgBox[n].innerHTML = `<span style="color:red">Cleared</span>`;
         }
-
-    } else {
-        listMsgBox[n].innerHTML = `<span style="color:red">Nothing to Clear</span>`
-    }
 
     for (let a=4*n ; a<4+(4*n);a++){
         cb[a].checked = false;

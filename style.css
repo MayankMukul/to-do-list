@@ -8,14 +8,7 @@
     margin: 2rem;
 }
 
-.notes-row {
-    display: flex;
-    flex-direction: row;
-}
-
 .list-row {
-    /* display: flex;
-    flex-direction: row; */
     align-items: center;
 }
 
@@ -31,6 +24,13 @@
     width: 80%;
 }
 
+.list-msg-box {
+    display: inline-block;
+    font-style: italic;
+    text-align: right;
+    width: 64%;
+}
+
 .input-title{
     border: none;
     margin: 10px;
@@ -39,12 +39,7 @@
     width: 80%;
 }
 
-.list-msg-box {
-    display: inline-block;
-    font-style: italic;
-    text-align: right;
-    width: 64%;
-}
+
 
 h5{ 
     display: inline;
@@ -58,19 +53,17 @@ h5{
     text-decoration: line-through;
 }
 
-.list {
-    /* width: 100%; */
-}
-
 .notes {
     width: 80%;
 }
+
 .note-msg-box{
     display: inline-block;
     font-style: italic;
     text-align: right;
     width: 80%;
 }
+
 .input-content {
     width: 100%;
     border: none;
@@ -82,13 +75,7 @@ h5{
 .btn {
     margin: 2px;
 }
-
-
+    
 .outline {
     outline: none;
-}
-
-#add-more{
-    text-align: right;
-    
 }

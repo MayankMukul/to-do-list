@@ -5,9 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New To Do List</title>
     <link rel="stylesheet" href="newstyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
 </head>
 <body>
+    <nav class="navbar">
+        <div class="container-fluid p-3">
+          <a class="navbar-brand"><h3>new TO DO List</h3></a>
+          <!-- <a href="newtodolist.html" ><h4>New To Do List</h4></a> -->
+        </div>
+    </nav>
 
+
+    <div class="container">
+        <div class="list-row">
+            <div class="row">
+                <div class="col-lg-6">
+                  <div class="card list m-4 p-3">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h5 >To Do List</h5>
+                            <button class="btn btn-primary" id="more-list">add more list</button>
+                        </div>
+                        <div class="list-msg-box"></div>
+                      <ul class="list-group">
+                        <li class="list-group-item p-2">
+                          <input class="input-list input-list-title" type="text" placeholder="Add Title Here..." />
+                        </li>
+                        <li class="list-group-item input-group">
+                          <input class="form-check-input checkbox me-1" type="checkbox" id="item1" />
+                          <input class="input-list list-item" id="item1" type="text" placeholder="Add Items Here..." />
+                        </li>
+                        
+                      </ul>
+                      <button class="btn btn-primary" id="add-list-item">add list item</button>
+                    </div>
+                    <div class="text-center">
+                      <button class="btn btn-primary savelist1">Save</button>
+                      <button class="btn btn-outline-danger clearlist1">Clear</button>
+                    </div>
+                  </div>
+                </div>
+        
+               
+              </div>
+        </div>
+    </div>
 
 
     <script src="todostyle.js"></script>

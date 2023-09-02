@@ -1,0 +1,18 @@
+.navbar {
+    padding: 1rem !important;
+    background-color: #e3f2fd
+}
+
+.card-title {
+    
+}
+
+h5 {
+    display: inline-block;
+}
+
+#more-list{
+    display: inline-block;
+    /* text-align: right; */
+    align-items: right;
+}

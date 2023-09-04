@@ -16,3 +16,8 @@ h5 {
     /* text-align: right; */
     align-items: right;
 }
+
+.delete-item {
+    cursor: pointer;
+    display: inline-block;
+}

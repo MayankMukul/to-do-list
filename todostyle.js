@@ -6,7 +6,6 @@ let deleteItem = document.querySelectorAll(".delete-item")
 // let row = document.querySelector(".row");
 // let addmorelist = document.querySelector("#more-list");
 let count = 0;
-
 let savebtn = document.querySelector(".savelist1");
 
 function addItem() {
@@ -121,17 +120,6 @@ function loadListItem(){
   // console.log(arr[r])
  }
 
-  // entrieslist.forEach((entries)=>{
-  //   console.log(`entries ${entries}`);
-  // })
-  
-
-
-  // console.log(entrieslist);
-  // for(let a=0;a<entrieslist.length;a++){
-  //   console.log(` ${Object.values(data)}`);
-  //   console.log("for running")
-  // }
   }
 }
 loadListItem();
@@ -143,8 +131,17 @@ function deleteListItem(e){
   count-=1;
   
 }
-// for(a of deleteItem){
-//   a.addEventListener("click",deleteListItem);
 
-// console.log(a);
-// }
+
+let clearbtn = document.querySelector(".clearlist1");
+function clearlist () {
+  listTitle.value = "";
+  let newlistItems=document.querySelectorAll(".list-item");
+newlistItems.forEach((item)=>{
+  item.value="";
+})
+
+}
+clearbtn.addEventListener("click",clearlist);
+
+

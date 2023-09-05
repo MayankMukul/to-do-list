@@ -7,12 +7,12 @@ let deleteItem = document.querySelectorAll(".delete-item")
 // let addmorelist = document.querySelector("#more-list");
 let count = 0;
 let savebtn = document.querySelector(".savelist1");
-
+// checkanduncheck
 function addItem() {
     count+=1;
   newlistitem = `
     <li class="list-group-item input-group">
-        <input class="form-check-input checkbox me-1" type="checkbox"  />
+        <input class="form-check-input checkbox me-1" type="checkbox" onClick="checkanduncheck(this)" />
         <input class="input-list list-item"  type="text" placeholder="Add Items Here..." />
         <button class="delete-item btn" onClick="deleteListItem(this)">
         <svg   xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
@@ -89,7 +89,7 @@ function saveList(){
   localStorage.setItem("Title",listTitle.value);
   
   
-
+updatecb();
 }
 savebtn.addEventListener("click",saveList);
 
@@ -121,6 +121,8 @@ function loadListItem(){
  }
 
   }
+
+  
 }
 loadListItem();
 
@@ -145,3 +147,58 @@ newlistItems.forEach((item)=>{
 clearbtn.addEventListener("click",clearlist);
 
 
+  var cb = document.querySelectorAll('.checkbox');
+
+
+// for(a of cb){
+//     a.addEventListener('change',function(){
+      
+//         if(this.checked && this.nextElementSibling.value!= "" ){
+//             this.nextElementSibling.classList.add("strike");
+//         }else {
+//             this.nextElementSibling.classList.remove("strike");
+//         }
+//     })
+// }
+
+function checkanduncheck(eventhandle){
+  if(eventhandle.checked && eventhandle.nextElementSibling.value!= "" ){
+    eventhandle.nextElementSibling.classList.add("strike");
+}else {
+    eventhandle.nextElementSibling.classList.remove("strike");
+}
+
+}
+
+function updatecb(){
+  cb = document.querySelectorAll('.checkbox');q
+  let cblListArray = [];
+  for(let j of cb){
+      if (j.checked){
+          cblListArray.push(true);
+      } else {
+          cblListArray.push(false);
+      }
+  }
+  localStorage.setItem(`cblistarray`,cblListArray);
+}
+
+function loadcb (){
+  if(localStorage.getItem(`cblistarray`)!==null){
+      let loadcbdata=localStorage.getItem(`cblistarray`);
+      let cbdata = loadcbdata.split(',');
+      for(let j in cbdata ){
+          if (cbdata[j]=='true'){
+              cb[j].checked=true;
+          } else {
+              cb[j].checked=false;
+          }
+      }
+      for (i of cb){
+          if(i.checked) {
+              i.nextElementSibling.classList.add("strike") ;
+          }
+       }  
+  }  
+}
+loadcb();

@@ -21,3 +21,7 @@ h5 {
     cursor: pointer;
     display: inline-block;
 }
+
+.strike {
+    text-decoration: line-through;    
+}

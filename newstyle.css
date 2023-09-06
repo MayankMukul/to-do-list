@@ -3,18 +3,46 @@
     background-color: #e3f2fd
 }
 
-.card-title {
-    
+.card {
+    width: 40%;
+    margin:  4rem auto;
 }
 
 h5 {
     display: inline-block;
 }
 
-#more-list{
+.list-msg-box{
     display: inline-block;
-    /* text-align: right; */
-    align-items: right;
+    text-align: right;
+    font-style: italic;
+}
+
+.input-list-title{
+    width: 90%;
+    font-weight: bold;
+    font-size: medium;
+    margin: 0 1rem ;
+    border: none;
+}
+
+.input-list {
+    border: none;
+    outline: none;
+    width: 80%;
+}
+
+.checkbox{
+    border-radius: .25em !important ;
+    
+}
+
+#add-list-item {
+    margin: 1rem 1rem 0 1rem ;
+}
+
+.buttons{
+    margin: 0 1rem 1rem 1rem;
 }
 
 .delete-item {
@@ -25,3 +53,16 @@ h5 {
 .strike {
     text-decoration: line-through;    
 }
+
+.footer {
+    /* display: flex;
+    flex-direction: column; */
+    margin-top: auto;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+

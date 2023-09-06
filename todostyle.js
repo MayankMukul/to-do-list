@@ -5,11 +5,9 @@ let deleteItem = document.querySelectorAll(".delete-item")
 
 let msgBox = document.querySelector(".list-msg-box")
 
-// let row = document.querySelector(".row");
-// let addmorelist = document.querySelector("#more-list");
 let count = 0;
 let savebtn = document.querySelector(".savelist1");
-// checkanduncheck
+
 function addItem() {
     count+=1;
   newlistitem = `
@@ -23,7 +21,6 @@ function addItem() {
         </button>
     </li>
     `;
-    // console.log(count);
     
   listgroup.insertAdjacentHTML("beforeend", newlistitem);
   msgBox.innerHTML=`<span style = "color:green"> Item Added</span>`;
@@ -31,38 +28,6 @@ function addItem() {
 addlistitem.addEventListener("click",addItem);
 
 
-// function morelist(){
-//     let newlist = `
-//     <div class="col-lg-6">
-//                   <div class="card list m-4 p-3">
-//                     <div class="card-body">
-//                         <div class="card-title">
-//                             <h5 >To Do List</h5>
-//                             <!--  <button class="btn btn-primary" id="more-list">add more list</button> -->
-//                         </div>
-//                         <div class="list-msg-box"></div>
-//                       <ul class="list-group">
-//                         <li class="list-group-item p-2">
-//                           <input class="input-list input-list-title" type="text" placeholder="Add Title Here..." />
-//                         </li>
-//                         <li class="list-group-item input-group">
-//                           <input class="form-check-input checkbox me-1" type="checkbox" id="item1" />
-//                           <input class="input-list list-item" id="item1" type="text" placeholder="Add Items Here..." />
-//                         </li>
-                        
-//                       </ul>
-//                       <button class="btn btn-primary" id="add-list-item">add list item</button>
-//                     </div>
-//                     <div class="text-center">
-//                       <button class="btn btn-primary savelist1">Save</button>
-//                       <button class="btn btn-outline-danger clearlist1">Clear</button>
-//                     </div>
-//                   </div>
-//                 </div>
-//     `
-//     row.insertAdjacentHTML("afterend",newlist);
-// }
-// addmorelist.addEventListener("click",morelist);
 let listTitle=document.querySelector(".input-list-title");
   let listItems=document.querySelectorAll(".list-item");
 
@@ -133,11 +98,9 @@ loadListItem();
 
 
 function deleteListItem(e){
-  // console.log("delete this",e.parentNode);
   listgroup.removeChild(e.parentNode);
   count-=1;
   msgBox.innerHTML=`<span style = "color:red"> Item Removed</span>`;
-  
 }
 
 
@@ -157,16 +120,6 @@ clearbtn.addEventListener("click",clearlist);
   var cb = document.querySelectorAll('.checkbox');
 
 
-// for(a of cb){
-//     a.addEventListener('change',function(){
-      
-//         if(this.checked && this.nextElementSibling.value!= "" ){
-//             this.nextElementSibling.classList.add("strike");
-//         }else {
-//             this.nextElementSibling.classList.remove("strike");
-//         }
-//     })
-// }
 
 function checkanduncheck(eventhandle){
   if(eventhandle.checked && eventhandle.nextElementSibling.value!= "" ){

@@ -1,6 +1,7 @@
 .navbar {
     padding: 1rem !important;
-    background-color: #e3f2fd
+    /* background-color: #e3f2fd */
+    /* color: white; */
 }
 
 .card {
@@ -55,8 +56,6 @@ h5 {
 }
 
 .footer {
-    /* display: flex;
-    flex-direction: column; */
     margin-top: auto;
 }
 

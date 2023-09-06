@@ -11,7 +11,7 @@
 <body>
     <nav class="navbar">
         <div class="container-fluid p-3">
-          <a class="navbar-brand"><h3>new TO DO List</h3></a>
+          <a class="navbar-brand"><h3>TO DO List <span class="badge bg-secondary">New</span></h3></a>
           <!-- <a href="newtodolist.html" ><h4>New To Do List</h4></a> -->
         </div>
     </nav>
@@ -24,8 +24,8 @@
                   <div class="card list">
                     <div class="card-body">
                         <div class="card-title col">
-                            <h5 class="col-3" >To Do List</h5>
-                            <div class="list-msg-box col-8"></div>
+                            <h5 class="col-5 col-xl-3" >To Do List</h5>
+                            <div class="list-msg-box col-xl-8 col-6"></div>
                         </div>
                       <ul class="list-group">
                         <li class="list-group-item p-2">
@@ -33,7 +33,7 @@
                         </li>
                         <li class="list-group-item input-group col">
                           <input class="form-check-input checkbox me-1 col-1" type="checkbox" id="item1" onClick="checkanduncheck(this)" />
-                          <input class="input-list list-item col-9" id="item1" type="text" placeholder="Add Items Here..." />
+                          <input class="input-list list-item col-xl-10 col-8" id="item1" type="text" placeholder="Add Items Here..." />
                           <button class="delete-item  btn col-1" onclick="deleteListItem(this)">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                               <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>

@@ -29,70 +29,53 @@ addlistitem.addEventListener("click",addItem);
 
 
 let listTitle=document.querySelector(".input-list-title");
-  let listItems=document.querySelectorAll(".list-item");
+let listItems=document.querySelectorAll(".list-item");
 
-function saveList(){
-  let listTitle=document.querySelector(".input-list-title");
-  let listItems=document.querySelectorAll(".list-item");
-  let listcount = count;
-  localStorage.setItem("count",listcount);
+function saveList() {
+  let listTitle = document.querySelector(".input-list-title");
+  let listItems = document.querySelectorAll(".list-item");
 
-
-  // console.log("save running");
-  let cache = {};
-  let n=0;
-  listItems.forEach((a)=>{
-    // console.log(n);
-    cache[n]= a.value ;  //key value pair
-    // console.log(JSON.stringify(a.value));
-    n++;
-  })
-  // console.log(cache);
-  // console.log(JSON.stringify(cache));
-  let cachestring = JSON.stringify(cache);
-  localStorage.setItem("cache",cachestring);
-  // console.log(listTitle.value);
-
-  // console.log(JSON.stringify(listTitle.value));
-  localStorage.setItem("Title",listTitle.value);
-  msgBox.innerHTML=`<span style = "color:green"> Saved</span>`;
-  
-  
-updatecb();
+  if (listTitle.value != "") {
+    let listcount = count;
+    localStorage.setItem("count", listcount);
+    console.log(listTitle.value);
+    let cache = {};
+    let n = 0;
+    listItems.forEach((a) => {
+      cache[n] = a.value; //key value pair
+      n++;
+    });
+    let cachestring = JSON.stringify(cache);
+    localStorage.setItem("cache", cachestring);
+    localStorage.setItem("Title", listTitle.value);
+    msgBox.innerHTML = `<span style = "color:green"> Saved</span>`;
+    updatecb();
+  } else {
+    msgBox.innerHTML = `<span style ="color : red;">Please Enter Title of List!</span>`;
+  }
 }
 savebtn.addEventListener("click",saveList);
 
 
-function loadListItem(){
-  if(localStorage.getItem('cache')!=null){
-
+function loadListItem() {           
+  if (localStorage.getItem("Title")) {
+   
     listTitle.value = localStorage.getItem("Title");
+    let strdata = localStorage.getItem("cache");
+    let data = JSON.parse(strdata);
+    let newcount = localStorage.getItem("count");
+    for (let a = 0; a < newcount; a++) {
+      addItem();
+    }
+    msgBox.innerHTML = `<span style = "color:green"> Restored</span>`;
+    let newlistItems = document.querySelectorAll(".list-item");
 
-  let strdata=localStorage.getItem('cache');
-  // console.log(JSON.parse(strdata))
-  let data = JSON.parse(strdata);
-
-  let newcount = localStorage.getItem("count");
-  for(let a=0;a<newcount;a++){
-//  console.log("newcount");
-  addItem();
-  msgBox.innerHTML=`<span style = "color:green"> Restored</span>`;
- }
-
- let newlistItems=document.querySelectorAll(".list-item");
-
-  let entrieslist = ( Object.values(data));
-  // console.log(entrieslist.length);
-  let arr = entrieslist;
-// console.log(newlistItems);
- for(let r=0;r<entrieslist.length;r++ ){
-  newlistItems[r].value = arr[r];
-  // console.log(arr[r])
- }
-
+    let entrieslist = Object.values(data);
+    let arr = entrieslist;
+    for (let r = 0; r < entrieslist.length; r++) {
+      newlistItems[r].value = arr[r];
+    }
   }
-
-  
 }
 loadListItem();
 
@@ -100,47 +83,48 @@ loadListItem();
 function deleteListItem(e){
   listgroup.removeChild(e.parentNode);
   count-=1;
+  
   msgBox.innerHTML=`<span style = "color:red"> Item Removed</span>`;
 }
 
 
 let clearbtn = document.querySelector(".clearlist1");
-function clearlist () {
+function clearlist() {
+  if(!confirm('Are you sure?')){return;}
   listTitle.value = "";
-  let newlistItems=document.querySelectorAll(".list-item");
-newlistItems.forEach((item)=>{
-  item.value="";
-})
-msgBox.innerHTML=`<span style = "color:red"> List Cleared</span>`;
-
+  let newlistItems = document.querySelectorAll(".list-item");
+  newlistItems.forEach((item) => {
+    item.value = "";
+    localStorage.removeItem("Title");
+    localStorage.removeItem("cache");
+    localStorage.removeItem("cblistarray");
+    localStorage.removeItem("count");
+  });
+  msgBox.innerHTML = `<span style = "color:red"> List Cleared</span>`;
 }
 clearbtn.addEventListener("click",clearlist);
 
+var cb = document.querySelectorAll('.checkbox');
 
-  var cb = document.querySelectorAll('.checkbox');
-
-
-
-function checkanduncheck(eventhandle){
-  if(eventhandle.checked && eventhandle.nextElementSibling.value!= "" ){
+function checkanduncheck(eventhandle) {
+  if (eventhandle.checked && eventhandle.nextElementSibling.value != "") {
     eventhandle.nextElementSibling.classList.add("strike");
-}else {
+  } else {
     eventhandle.nextElementSibling.classList.remove("strike");
-}
-
-}
-
-function updatecb(){
-  cb = document.querySelectorAll('.checkbox');
-  let cblListArray = [];
-  for(let j of cb){
-      if (j.checked){
-          cblListArray.push(true);
-      } else {
-          cblListArray.push(false);
-      }
   }
-  localStorage.setItem(`cblistarray`,cblListArray);
+}
+
+function updatecb() {
+  cb = document.querySelectorAll(".checkbox");
+  let cblListArray = [];
+  for (let j of cb) {
+    if (j.checked) {
+      cblListArray.push(true);
+    } else {
+      cblListArray.push(false);
+    }
+  }
+  localStorage.setItem(`cblistarray`, cblListArray);
 }
 
 function loadcb (){

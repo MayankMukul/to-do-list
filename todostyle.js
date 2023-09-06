@@ -3,6 +3,8 @@ let listgroup = document.querySelector(".list-group");
 let newlistitem ;
 let deleteItem = document.querySelectorAll(".delete-item")
 
+let msgBox = document.querySelector(".list-msg-box")
+
 // let row = document.querySelector(".row");
 // let addmorelist = document.querySelector("#more-list");
 let count = 0;
@@ -11,10 +13,10 @@ let savebtn = document.querySelector(".savelist1");
 function addItem() {
     count+=1;
   newlistitem = `
-    <li class="list-group-item input-group">
-        <input class="form-check-input checkbox me-1" type="checkbox" onClick="checkanduncheck(this)" />
-        <input class="input-list list-item"  type="text" placeholder="Add Items Here..." />
-        <button class="delete-item btn" onClick="deleteListItem(this)">
+    <li class="list-group-item input-group col">
+        <input class="form-check-input checkbox me-1 col-1" type="checkbox" onClick="checkanduncheck(this)" />
+        <input class="input-list list-item col-9"  type="text" placeholder="Add Items Here..." />
+        <button class="delete-item btn col-1" onClick="deleteListItem(this)">
         <svg   xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
         </svg>
@@ -24,6 +26,7 @@ function addItem() {
     // console.log(count);
     
   listgroup.insertAdjacentHTML("beforeend", newlistitem);
+  msgBox.innerHTML=`<span style = "color:green"> Item Added</span>`;
 }
 addlistitem.addEventListener("click",addItem);
 
@@ -87,6 +90,7 @@ function saveList(){
 
   // console.log(JSON.stringify(listTitle.value));
   localStorage.setItem("Title",listTitle.value);
+  msgBox.innerHTML=`<span style = "color:green"> Saved</span>`;
   
   
 updatecb();
@@ -107,6 +111,7 @@ function loadListItem(){
   for(let a=0;a<newcount;a++){
 //  console.log("newcount");
   addItem();
+  msgBox.innerHTML=`<span style = "color:green"> Restored</span>`;
  }
 
  let newlistItems=document.querySelectorAll(".list-item");
@@ -131,6 +136,7 @@ function deleteListItem(e){
   // console.log("delete this",e.parentNode);
   listgroup.removeChild(e.parentNode);
   count-=1;
+  msgBox.innerHTML=`<span style = "color:red"> Item Removed</span>`;
   
 }
 
@@ -142,6 +148,7 @@ function clearlist () {
 newlistItems.forEach((item)=>{
   item.value="";
 })
+msgBox.innerHTML=`<span style = "color:red"> List Cleared</span>`;
 
 }
 clearbtn.addEventListener("click",clearlist);
@@ -171,7 +178,7 @@ function checkanduncheck(eventhandle){
 }
 
 function updatecb(){
-  cb = document.querySelectorAll('.checkbox');q
+  cb = document.querySelectorAll('.checkbox');
   let cblListArray = [];
   for(let j of cb){
       if (j.checked){

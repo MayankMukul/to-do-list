@@ -18,24 +18,23 @@
 
 
     <div class="container">
-        <div class="list-row">
-            <div class="row">
-                <div class="col-lg-6">
-                  <div class="card list m-4 p-3">
+        
+            
+                
+                  <div class="card list">
                     <div class="card-body">
-                        <div class="card-title">
-                            <h5 >To Do List</h5>
-                            <!-- <button class="btn btn-primary" id="more-list">add more list</button> -->
+                        <div class="card-title col">
+                            <h5 class="col-3" >To Do List</h5>
+                            <div class="list-msg-box col-8"></div>
                         </div>
-                        <div class="list-msg-box"></div>
                       <ul class="list-group">
                         <li class="list-group-item p-2">
-                          <input class="input-list input-list-title" type="text" placeholder="Add Title Here..." />
+                          <input class="input-list input-list-title " type="text" placeholder="Add Title Here..." />
                         </li>
-                        <li class="list-group-item input-group">
-                          <input class="form-check-input checkbox me-1" type="checkbox" id="item1" />
-                          <input class="input-list list-item" id="item1" type="text" placeholder="Add Items Here..." />
-                          <button class="delete-item btn-outline-danger btn" onclick="deleteListItem(this)">
+                        <li class="list-group-item input-group col">
+                          <input class="form-check-input checkbox me-1 col-1" type="checkbox" id="item1" onClick="checkanduncheck(this)" />
+                          <input class="input-list list-item col-9" id="item1" type="text" placeholder="Add Items Here..." />
+                          <button class="delete-item  btn col-1" onclick="deleteListItem(this)">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                               <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                            </svg>
@@ -44,18 +43,31 @@
                         
                         
                       </ul>
-                      <button class="btn btn-primary" id="add-list-item">add list item</button>
+                      <button class="btn btn-primary" id="add-list-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                        </svg>
+                        Add Item</button>
                     </div>
-                    <div class="text-center">
+                    <div class="text-center buttons">
                       <button class="btn btn-primary savelist1">Save</button>
                       <button class="btn btn-outline-danger clearlist1">Clear</button>
                     </div>
                   </div>
-                </div>
+                
         
                
-              </div>
+              
+        
+    </div>
+
+    <div class="footer">
+      <nav class="navbar p-4">
+        <div class="container-fluid">
+          <span class="text-center m-auto"><a class="navbar-brand" href="https://github.com/MayankMukul">Made by
+              @MayankMukul</a></span>
         </div>
+      </nav>
     </div>
 
 
